@@ -4,10 +4,10 @@ const DAYS = ["S", "M", "T", "W", "T", "F", "S"];
 const FULL_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const DEFAULT_HABITS = [
-  { id: 1, name: "Drink Water 💧", color: "#4fc3f7", streak: 0, completedDays: [] },
-  { id: 2, name: "Study 📖", color: "#f48fb1", streak: 0, completedDays: [] },
-  { id: 3, name: "No Junk Food 🥗", color: "#a5d6a7", streak: 0, completedDays: [] },
-  { id: 4, name: "Wake Up Early 🌅", color: "#ffe082", streak: 0, completedDays: [] },
+  { id: 1, name: "Drink Water 💧", category: "Glow Up", color: "#4fc3f7", streak: 0, completedDays: [] },
+  { id: 2, name: "Study 📖", category: "Study", color: "#f48fb1", streak: 0, completedDays: [] },
+  { id: 3, name: "No Junk Food 🥗", category: "Glow Up", color: "#a5d6a7", streak: 0, completedDays: [] },
+  { id: 4, name: "Wake Up Early 🌅", category: "Mind", color: "#ffe082", streak: 0, completedDays: [] },
 ];
 
 const todayIndex = new Date().getDay();
@@ -90,8 +90,9 @@ export default function HabitTracker() {
     if (!newHabit.trim()) return;
     const colors = ["#ce93d8", "#80deea", "#ffcc80", "#ef9a9a", "#c5e1a5"];
     const newH = {
-      id: Date.now(),
-      name: newHabit.trim(),
+  id: Date.now(),
+  name: newHabit.trim(),
+  category: "Glow Up",
       color: colors[habits.length % colors.length],
       streak: 0,
       completedDays: [],
@@ -336,16 +337,46 @@ export default function HabitTracker() {
         {habits.map(habit => (
           <div key={habit.id} className="habit-row">
             <button className="del-btn" onClick={() => deleteHabit(habit.id)}>×</button>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                <span style={{ fontSize: 14, fontWeight: 500 }}>{habit.name}</span>
-                {habit.streak > 0 && (
-                  <span className="streak-badge" style={{ background: `${habit.color}22`, color: habit.color }}>
-                    🔥 {habit.streak}
-                  </span>
-                )}
-              </div>
-            </div>
+            <div style={{ marginBottom: 6 }}>
+
+  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+    
+    {/* LEFT SIDE */}
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      
+      <span style={{ fontSize: 14, fontWeight: 500 }}>
+        {habit.name}
+      </span>
+
+      <span style={{
+        fontSize: 11,
+        color: "rgba(255,255,255,0.35)",
+        marginTop: 2
+      }}>
+        {habit.category}
+      </span>
+
+    </div>
+
+    {/* RIGHT SIDE (STREAK) */}
+    {habit.streak > 0 && (
+      <span
+        className="streak-badge"
+        style={{
+          background: `${habit.color}22`,
+          color: habit.color,
+          fontSize: 11,
+          padding: "4px 8px",
+          borderRadius: 999
+        }}
+      >
+        🔥 {habit.streak}
+      </span>
+    )}
+
+  </div>
+
+</div>
             <div style={{ display: "flex", gap: 4 }}>
               {weekKeys.map((key, i) => {
                 const done = habit.completedDays.includes(key);
