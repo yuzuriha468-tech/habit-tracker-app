@@ -345,7 +345,7 @@ export default function HabitTracker() {
 
         {/* Footer */}
         <p style={{ textAlign: "center", marginTop: 40, fontSize: 12, color: "rgba(255,255,255,0.18)", letterSpacing: "0.05em" }}>
-          built with 🖤 for mochi
+          discipline creates confidence 🔥
         </p>
       </div>
     </div>
