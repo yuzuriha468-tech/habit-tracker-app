@@ -17,14 +17,24 @@ const todayKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2
 function getWeekKeys() {
   const keys = [];
   const today = new Date();
-  for (let i = 6; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-    keys.push(d.toISOString().split("T")[0]);
+
+  // get current day index (0 = Sunday)
+  const day = today.getDay();
+
+  // go back to Sunday
+  const sunday = new Date(today);
+  sunday.setDate(today.getDate() - day);
+
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(sunday);
+    d.setDate(sunday.getDate() + i);
+
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    keys.push(key);
   }
+
   return keys;
 }
-
 export default function HabitTracker() {
   const [habits, setHabits] = useState(() => {
     try {
