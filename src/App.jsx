@@ -42,7 +42,9 @@ export default function HabitTracker() {
       return saved ? JSON.parse(saved) : DEFAULT_HABITS;
     } catch { return DEFAULT_HABITS; }
   });
-  const [activeCategory, setActiveCategory] = useState("All");
+const [newHabit, setNewHabit] = useState("");
+const [adding, setAdding] = useState(false);
+const [activeCategory, setActiveCategory] = useState("All");
 
 const categories = ["All", "Glow Up", "Study", "Mind", "Fitness"];
 
