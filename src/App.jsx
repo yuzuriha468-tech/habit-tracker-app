@@ -257,9 +257,18 @@ export default function HabitTracker() {
             <div>
               <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Today's Progress</p>
               <p style={{ fontSize: 28, fontWeight: 600, marginTop: 2 }}>{todayCompleted}<span style={{ fontSize: 16, color: "rgba(255,255,255,0.35)" }}>/{habits.length}</span></p>
-            </div>
-            <p style={{ fontSize: 32, fontWeight: 700, color: progress === 100 ? "#a5d6a7" : "#f48fb1" }}>{progress}%</p>
-          </div>
+            <div>
+  <p style={{ fontSize: 32, fontWeight: 700, color: progress === 100 ? "#a5d6a7" : "#f48fb1" }}>
+    {progress}%
+  </p>
+
+  <p style={{ fontSize: 14, marginTop: 6, color: "rgba(255,255,255,0.5)" }}>
+    {progress < 30 && "Lazy day 😴"}
+    {progress >= 30 && progress < 70 && "Getting there 👀"}
+    {progress >= 70 && progress < 100 && "That girl energy 💅"}
+    {progress === 100 && "Perfect day 🔥"}
+  </p>
+</div>
           <div className="progress-bar-track">
             <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
           </div>
