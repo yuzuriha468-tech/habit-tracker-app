@@ -248,7 +248,7 @@ export default function HabitTracker() {
 
         {/* Progress Card */}
        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 4 }}>
-  
+
   {/* LEFT SIDE */}
   <div>
     <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
@@ -264,7 +264,8 @@ export default function HabitTracker() {
   </div>
 
   {/* RIGHT SIDE */}
-  <div style={{ textAlign: "right" }}>
+  <div style={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+    
     <p style={{ fontSize: 32, fontWeight: 700, color: progress === 100 ? "#a5d6a7" : "#f48fb1" }}>
       {progress}%
     </p>
@@ -275,10 +276,11 @@ export default function HabitTracker() {
       {progress >= 70 && progress < 100 && "That girl energy 💅"}
       {progress === 100 && "Perfect day 🔥"}
     </p>
+
   </div>
 
 </div>
-          <div className="progress-bar-track">
+<div className="progress-bar-track">
             <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
           </div>
         </div>
