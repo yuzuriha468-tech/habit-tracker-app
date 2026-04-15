@@ -42,9 +42,11 @@ export default function HabitTracker() {
       return saved ? JSON.parse(saved) : DEFAULT_HABITS;
     } catch { return DEFAULT_HABITS; }
   });
-  const [newHabit, setNewHabit] = useState("");
-  const [adding, setAdding] = useState(false);
-  const [quote] = useState(() => {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+const categories = ["All", "Glow Up", "Study", "Mind", "Fitness"];
+
+const [quote] = useState(() => {
     const quotes = [
       "Small steps. Big life. 🌸",
       "You got this, bestie. 💪",
@@ -333,8 +335,36 @@ export default function HabitTracker() {
           })}
         </div>
 
+<div style={{
+  display: "flex",
+  gap: 8,
+  marginBottom: 16,
+  overflowX: "auto"
+}}>
+  {categories.map(cat => (
+    <button
+      key={cat}
+      onClick={() => setActiveCategory(cat)}
+      style={{
+        padding: "6px 12px",
+        borderRadius: 999,
+        border: "1px solid rgba(255,255,255,0.15)",
+        background: activeCategory === cat ? "#f48fb1" : "transparent",
+        color: activeCategory === cat ? "#0d0d0d" : "rgba(255,255,255,0.6)",
+        fontSize: 12,
+        cursor: "pointer",
+        whiteSpace: "nowrap"
+      }}
+    >
+      {cat}
+    </button>
+  ))}
+</div>
+
         {/* Habits */}
-        {habits.map(habit => (
+        {habits
+  .filter(habit => activeCategory === "All" || habit.category === activeCategory)
+  .map(habit => (
           <div key={habit.id} className="habit-row">
             <button className="del-btn" onClick={() => deleteHabit(habit.id)}>×</button>
             <div style={{ marginBottom: 6 }}>
