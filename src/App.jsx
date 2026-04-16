@@ -168,18 +168,13 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
         }
 
         .habit-row {
-          display: grid;
-          grid-template-columns: minmax(0, 1fr) auto;
-          gap: 16px;
-          align-items: center;
+          display: flex;
+          flex-direction: column;
           padding: 16px 20px;
           border-radius: 16px;
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.07);
           margin-bottom: 10px;
-          transition: background 0.2s;
-          position: relative;
-          z-index: 1;
         }
         .habit-row:hover { background: rgba(255,255,255,0.07); }
 
@@ -404,9 +399,12 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
 <div style={{
   display: "flex",
   alignItems: "center",
-  marginBottom: 10
+  justifyContent: "space-between",
+  marginBottom: 8
 }}>
-  <div style={{ flex: 1, minWidth: 0 }}>
+
+  {/* LEFT */}
+  <div style={{ minWidth: 0 }}>
     <div style={{
       fontSize: 14,
       fontWeight: 500,
@@ -419,26 +417,26 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
 
     <div style={{
       fontSize: 11,
-      color: "rgba(255,255,255,0.35)",
-      marginTop: 2
+      color: "rgba(255,255,255,0.35)"
     }}>
       {habit.category}
     </div>
   </div>
 
+  {/* RIGHT (STREAK INLINE FIXED) */}
   {habit.streak > 0 && (
     <div style={{
-      marginLeft: 10,
-      background: `${habit.color}22`,
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      fontSize: 12,
       color: habit.color,
-      fontSize: 11,
-      padding: "4px 8px",
-      borderRadius: 999,
       whiteSpace: "nowrap"
     }}>
-      🔥 {habit.streak}
+      🔥 <span>{habit.streak}</span>
     </div>
   )}
+
 </div>
 
 {/* BOTTOM: circles */}
