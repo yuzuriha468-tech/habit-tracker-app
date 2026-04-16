@@ -60,19 +60,21 @@ const [quote] = useState(() => {
   });
 
   const weekKeys = getWeekKeys();
-const weeklyCompleted = habits.reduce((total, habit) => {
+const weeklyCompleted = filteredHabits.reduce((total, habit) => {
   return total + habit.completedDays.filter(day => weekKeys.includes(day)).length;
 }, 0);
 
-const weeklyTotal = habits.length * 7;
+const weeklyTotal = filteredHabits.length * 7;
 
 const weeklyPercent = weeklyTotal
   ? Math.round((weeklyCompleted / weeklyTotal) * 100)
   : 0;
 
-const bestStreak = Math.max(...habits.map(h => h.streak), 0);
+const bestStreak = filteredHabits.length
+  ? Math.max(...filteredHabits.map(h => h.streak))
+  : 0;
 const dailyData = weekKeys.map(day => {
-  const count = habits.filter(h => h.completedDays.includes(day)).length;
+  const count = filteredHabits.filter(h => h.completedDays.includes(day)).length;
   return {
     day,
     count
