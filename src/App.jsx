@@ -93,10 +93,10 @@ const [quote] = useState(() => {
   const addHabit = () => {
     if (!newHabit.trim()) return;
     const colors = ["#ce93d8", "#80deea", "#ffcc80", "#ef9a9a", "#c5e1a5"];
-    const newH = {
+const newH = {
   id: Date.now(),
   name: newHabit.trim(),
-  category: "Glow Up",
+  category: activeCategory === "All" ? "Glow Up" : activeCategory,
       color: colors[habits.length % colors.length],
       streak: 0,
       completedDays: [],
