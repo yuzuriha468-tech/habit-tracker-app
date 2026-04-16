@@ -170,7 +170,7 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
         .habit-row {
           display: grid;
           grid-template-columns: minmax(0, 1fr) auto;
-          gap: 12px;
+          gap: 16px;
           align-items: center;
           padding: 16px 20px;
           border-radius: 16px;
@@ -441,8 +441,9 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
 </div>
             <div style={{
               display: "flex",
-              gap: 4,
-              flexWrap: "wrap",
+              gap: 6,
+              marginLeft: 8,
+              overflowX: "auto"
               justifyContent: "flex-end"
             }}>
               {weekKeys.map((key, i) => {
@@ -528,7 +529,7 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
   gap: 6
 }}>
   {dailyData.map((d, i) => {
-    const height = (d.count / maxDaily) * 60;
+    const height = d.count === 0 ? 6 : (d.count / maxDaily) * 60;
 
     return (
       <div key={i} style={{ textAlign: "center", flex: 1 }}>
