@@ -399,81 +399,73 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
   .map(habit => (
           <div key={habit.id} className="habit-row">
             <button className="del-btn" onClick={() => deleteHabit(habit.id)}>×</button>
-            <div style={{ marginBottom: 8 }}>
 
-  {/* ROW 1: name + streak */}
-  <div style={{
-    display: "flex",
-    alignItems: "center"
-  }}>
-    
-    <div style={{ flex: 1, minWidth: 0 }}>
-      <span style={{
-        fontSize: 14,
-        fontWeight: 500,
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis"
-      }}>
-        {habit.name}
-      </span>
-
-      <div style={{
-        fontSize: 11,
-        color: "rgba(255,255,255,0.35)",
-        marginTop: 2
-      }}>
-        {habit.category}
-      </div>
+{/* TOP: name + streak */}
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  marginBottom: 10
+}}>
+  <div style={{ flex: 1, minWidth: 0 }}>
+    <div style={{
+      fontSize: 14,
+      fontWeight: 500,
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis"
+    }}>
+      {habit.name}
     </div>
 
-    {habit.streak > 0 && (
-      <span
-        style={{
-          marginLeft: 8,
-          background: `${habit.color}22`,
-          color: habit.color,
-          fontSize: 11,
-          padding: "4px 8px",
-          borderRadius: 999,
-          whiteSpace: "nowrap"
-        }}
-      >
-        🔥 {habit.streak}
-      </span>
-    )}
-
+    <div style={{
+      fontSize: 11,
+      color: "rgba(255,255,255,0.35)",
+      marginTop: 2
+    }}>
+      {habit.category}
+    </div>
   </div>
 
+  {habit.streak > 0 && (
+    <div style={{
+      marginLeft: 10,
+      background: `${habit.color}22`,
+      color: habit.color,
+      fontSize: 11,
+      padding: "4px 8px",
+      borderRadius: 999,
+      whiteSpace: "nowrap"
+    }}>
+      🔥 {habit.streak}
+    </div>
+  )}
 </div>
-            <div style={{
-              display: "flex",
-              gap: 6,
-              marginLeft: 8,
-              justifyContent: "flex-end",
-              flexWrap: "nowrap",
-              overflow: "hidden",
-              maxWidth: "100%"
-            }}>
-              {weekKeys.map((key, i) => {
-                const done = habit.completedDays.includes(key);
-                const isToday = key === todayKey;
-                return (
-                  <button
-                    key={key}
-                    className={`day-dot ${done ? "done" : ""} ${isToday ? "today-dot" : ""}`}
-                    style={{
-                      background: done ? habit.color : "transparent",
-                      borderColor: isToday && !done ? habit.color : undefined,
-                    }}
-                    onClick={() => toggleDay(habit.id, key)}
-                    title={key}
-                  >
-                    {done ? "✓" : ""}
-                  </button>
-                );
-              })}
-            </div>
+
+{/* BOTTOM: circles */}
+<div style={{
+  display: "flex",
+  gap: 6,
+  overflowX: "auto"
+}}>
+  {weekKeys.map((key) => {
+    const done = habit.completedDays.includes(key);
+    const isToday = key === todayKey;
+
+    return (
+      <button
+        key={key}
+        className={`day-dot ${done ? "done" : ""} ${isToday ? "today-dot" : ""}`}
+        style={{
+          background: done ? habit.color : "transparent",
+          borderColor: isToday && !done ? habit.color : undefined,
+        }}
+        onClick={() => toggleDay(habit.id, key)}
+      >
+        {done ? "✓" : ""}
+      </button>
+    );
+  })}
+</div>
           </div>
         ))}
 
