@@ -60,6 +60,17 @@ const [quote] = useState(() => {
   });
 
   const weekKeys = getWeekKeys();
+const weeklyCompleted = habits.reduce((total, habit) => {
+  return total + habit.completedDays.filter(day => weekKeys.includes(day)).length;
+}, 0);
+
+const weeklyTotal = habits.length * 7;
+
+const weeklyPercent = weeklyTotal
+  ? Math.round((weeklyCompleted / weeklyTotal) * 100)
+  : 0;
+
+const bestStreak = Math.max(...habits.map(h => h.streak), 0);
 
   useEffect(() => {
     try { localStorage.setItem("habits_v2", JSON.stringify(habits)); } catch {}
@@ -462,6 +473,38 @@ const progress = filteredHabits.length
             + Add new habit
           </button>
         )}
+
+<div style={{
+  marginTop: 30,
+  padding: "20px",
+  borderRadius: 16,
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.08)"
+}}>
+
+  <p style={{
+    fontSize: 12,
+    color: "rgba(255,255,255,0.35)",
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    marginBottom: 10
+  }}>
+    This Week
+  </p>
+
+  <p style={{ fontSize: 14, marginBottom: 6 }}>
+    ✔ Completed: {weeklyCompleted}
+  </p>
+
+  <p style={{ fontSize: 14, marginBottom: 6 }}>
+    🔥 Best streak: {bestStreak} days
+  </p>
+
+  <p style={{ fontSize: 14 }}>
+    📈 Consistency: {weeklyPercent}%
+  </p>
+
+</div>
 
         {/* Footer */}
         <p style={{ textAlign: "center", marginTop: 40, fontSize: 12, color: "rgba(255,255,255,0.18)", letterSpacing: "0.05em" }}>
