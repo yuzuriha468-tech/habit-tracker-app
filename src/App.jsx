@@ -134,7 +134,7 @@ const weeklyPercent = weeklyTotal
   : 0;
 
 const bestStreak = filteredHabits.length
-  ? Math.max(...filteredHabits.map(h => h.streak))
+  ? Math.max(...filteredHabits.map(h => h.streak || 0))
   : 0;
 
 const dailyData = weekKeys.map(day => {
