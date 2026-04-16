@@ -130,10 +130,12 @@ const newH = {
     setHabits(prev => prev.filter(h => h.id !== id));
   };
 
-  const filteredHabits = habits.filter(
-  h => activeCategory === "All" || h.category === activeCategory
-);
-  const todayCompleted = filteredHabits.filter(h =>
+const filteredHabits =
+  activeCategory === "All"
+    ? habits
+    : habits.filter(h => h.category === activeCategory);
+
+const todayCompleted = filteredHabits.filter(h =>
   h.completedDays.includes(todayKey)
 ).length;
 
@@ -167,7 +169,7 @@ const progress = filteredHabits.length
 
         .habit-row {
           display: grid;
-          grid-template-columns: 1fr auto;
+          grid-template-columns: minmax(0, 1fr) auto;
           gap: 12px;
           align-items: center;
           padding: 16px 20px;
@@ -437,7 +439,12 @@ const progress = filteredHabits.length
   </div>
 
 </div>
-            <div style={{ display: "flex", gap: 4 }}>
+            <div style={{
+              display: "flex",
+              gap: 4,
+              flexWrap: "wrap",
+              justifyContent: "flex-end"
+            }}>
               {weekKeys.map((key, i) => {
                 const done = habit.completedDays.includes(key);
                 const isToday = key === todayKey;
