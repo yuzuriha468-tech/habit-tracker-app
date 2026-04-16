@@ -283,9 +283,9 @@ const progress = filteredHabits.length
 
       <p style={{ fontSize: 28, fontWeight: 600, marginTop: 2 }}>
         {todayCompleted}
-        <span style={{ fontSize: 16, color: "rgba(255,255,255,0.35)" }}>
-          /{habits.length}
-        </span>
+<span style={{ fontSize: 16, color: "rgba(255,255,255,0.35)" }}>
+  /{filteredHabits.length}
+</span>
       </p>
     </div>
 
