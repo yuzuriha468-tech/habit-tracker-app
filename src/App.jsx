@@ -71,6 +71,15 @@ const weeklyPercent = weeklyTotal
   : 0;
 
 const bestStreak = Math.max(...habits.map(h => h.streak), 0);
+const dailyData = weekKeys.map(day => {
+  const count = habits.filter(h => h.completedDays.includes(day)).length;
+  return {
+    day,
+    count
+  };
+});
+
+const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
 
   useEffect(() => {
     try { localStorage.setItem("habits_v2", JSON.stringify(habits)); } catch {}
@@ -503,6 +512,36 @@ const progress = filteredHabits.length
   <p style={{ fontSize: 14 }}>
     📈 Consistency: {weeklyPercent}%
   </p>
+
+<div style={{
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-end",
+  marginTop: 16,
+  gap: 6
+}}>
+  {dailyData.map((d, i) => {
+    const height = (d.count / maxDaily) * 60;
+
+    return (
+      <div key={i} style={{ textAlign: "center", flex: 1 }}>
+        <div style={{
+          height: `${height}px`,
+          background: "linear-gradient(180deg, #ce93d8, #f48fb1)",
+          borderRadius: 6,
+          marginBottom: 4,
+          transition: "0.3s"
+        }} />
+        <span style={{
+          fontSize: 10,
+          color: "rgba(255,255,255,0.3)"
+        }}>
+          {new Date(d.day).toLocaleDateString("en-US", { weekday: "short" })}
+        </span>
+      </div>
+    );
+  })}
+</div>
 
 </div>
 
