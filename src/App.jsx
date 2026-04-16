@@ -399,21 +399,15 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
   .map(habit => (
           <div key={habit.id} className="habit-row">
             <button className="del-btn" onClick={() => deleteHabit(habit.id)}>×</button>
-            <div style={{ marginBottom: 6 }}>
+            <div style={{ marginBottom: 8 }}>
 
-<div style={{
-  display: "flex",
-  alignItems: "center",
-  gap: 8
-}}>
+  {/* ROW 1: name + streak */}
+  <div style={{
+    display: "flex",
+    alignItems: "center"
+  }}>
     
-    {/* LEFT SIDE */}
-<div style={{
-  display: "flex",
-  flexDirection: "column",
-  minWidth: 0,
-  flex: 1
-}}>      
+    <div style={{ flex: 1, minWidth: 0 }}>
       <span style={{
         fontSize: 14,
         fontWeight: 500,
@@ -424,34 +418,30 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
         {habit.name}
       </span>
 
-      <span style={{
+      <div style={{
         fontSize: 11,
         color: "rgba(255,255,255,0.35)",
         marginTop: 2
       }}>
         {habit.category}
-      </span>
-
+      </div>
     </div>
 
-    {/* RIGHT SIDE (STREAK) */}
-{habit.streak > 0 && (
-  <span
-    className="streak-badge"
-    style={{
-      marginLeft: "auto",
-      background: `${habit.color}22`,
-      color: habit.color,
-      fontSize: 11,
-      padding: "4px 8px",
-      borderRadius: 999,
-      whiteSpace: "nowrap",
-      flexShrink: 0
-    }}
-  >
-    🔥 {habit.streak}
-  </span>
-)}
+    {habit.streak > 0 && (
+      <span
+        style={{
+          marginLeft: 8,
+          background: `${habit.color}22`,
+          color: habit.color,
+          fontSize: 11,
+          padding: "4px 8px",
+          borderRadius: 999,
+          whiteSpace: "nowrap"
+        }}
+      >
+        🔥 {habit.streak}
+      </span>
+    )}
 
   </div>
 
