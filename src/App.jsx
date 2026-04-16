@@ -59,8 +59,6 @@ const [quote] = useState(() => {
     return quotes[new Date().getDay() % quotes.length];
   });
 
-  const weekKeys = getWeekKeys();
-
   useEffect(() => {
     try { localStorage.setItem("habits_v2", JSON.stringify(habits)); } catch {}
   }, [habits]);
@@ -109,6 +107,8 @@ const newH = {
   const deleteHabit = (id) => {
     setHabits(prev => prev.filter(h => h.id !== id));
   };
+
+const weekKeys = getWeekKeys();
 
 const filteredHabits =
   activeCategory === "All"
