@@ -60,28 +60,6 @@ const [quote] = useState(() => {
   });
 
   const weekKeys = getWeekKeys();
-const weeklyCompleted = filteredHabits.reduce((total, habit) => {
-  return total + habit.completedDays.filter(day => weekKeys.includes(day)).length;
-}, 0);
-
-const weeklyTotal = filteredHabits.length * 7;
-
-const weeklyPercent = weeklyTotal
-  ? Math.round((weeklyCompleted / weeklyTotal) * 100)
-  : 0;
-
-const bestStreak = filteredHabits.length
-  ? Math.max(...filteredHabits.map(h => h.streak))
-  : 0;
-const dailyData = weekKeys.map(day => {
-  const count = filteredHabits.filter(h => h.completedDays.includes(day)).length;
-  return {
-    day,
-    count
-  };
-});
-
-const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
 
   useEffect(() => {
     try { localStorage.setItem("habits_v2", JSON.stringify(habits)); } catch {}
@@ -145,6 +123,26 @@ const progress = filteredHabits.length
   ? Math.round((todayCompleted / filteredHabits.length) * 100)
   : 0;
 
+const weeklyCompleted = filteredHabits.reduce((total, habit) => {
+  return total + habit.completedDays.filter(day => weekKeys.includes(day)).length;
+}, 0);
+
+const weeklyTotal = filteredHabits.length * 7;
+
+const weeklyPercent = weeklyTotal
+  ? Math.round((weeklyCompleted / weeklyTotal) * 100)
+  : 0;
+
+const bestStreak = filteredHabits.length
+  ? Math.max(...filteredHabits.map(h => h.streak))
+  : 0;
+
+const dailyData = weekKeys.map(day => {
+  const count = filteredHabits.filter(h => h.completedDays.includes(day)).length;
+  return { day, count };
+});
+
+const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
   return (
     <div style={{
       minHeight: "100vh",
