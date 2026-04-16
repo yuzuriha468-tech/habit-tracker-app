@@ -401,10 +401,20 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
             <button className="del-btn" onClick={() => deleteHabit(habit.id)}>×</button>
             <div style={{ marginBottom: 6 }}>
 
-  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+<div style={{
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: 8,
+  flexWrap: "nowrap"
+}}>
     
     {/* LEFT SIDE */}
-    <div style={{ display: "flex", flexDirection: "column" }}>
+<div style={{
+  display: "flex",
+  flexDirection: "column",
+  overflow: "hidden"
+}}>
       
       <span style={{ fontSize: 14, fontWeight: 500 }}>
         {habit.name}
@@ -421,20 +431,22 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
     </div>
 
     {/* RIGHT SIDE (STREAK) */}
-    {habit.streak > 0 && (
-      <span
-        className="streak-badge"
-        style={{
-          background: `${habit.color}22`,
-          color: habit.color,
-          fontSize: 11,
-          padding: "4px 8px",
-          borderRadius: 999
-        }}
-      >
-        🔥 {habit.streak}
-      </span>
-    )}
+{habit.streak > 0 && (
+  <span
+    className="streak-badge"
+    style={{
+      background: `${habit.color}22`,
+      color: habit.color,
+      fontSize: 11,
+      padding: "4px 8px",
+      borderRadius: 999,
+      whiteSpace: "nowrap",  
+      flexShrink: 0           
+    }}
+  >
+    🔥 {habit.streak}
+  </span>
+)}
 
   </div>
 
