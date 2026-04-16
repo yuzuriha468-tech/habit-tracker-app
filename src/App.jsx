@@ -110,8 +110,16 @@ const newH = {
     setHabits(prev => prev.filter(h => h.id !== id));
   };
 
-  const todayCompleted = habits.filter(h => h.completedDays.includes(todayKey)).length;
-  const progress = habits.length ? Math.round((todayCompleted / habits.length) * 100) : 0;
+  const filteredHabits = habits.filter(
+  h => activeCategory === "All" || h.category === activeCategory
+);
+  const todayCompleted = filteredHabits.filter(h =>
+  h.completedDays.includes(todayKey)
+).length;
+
+const progress = filteredHabits.length
+  ? Math.round((todayCompleted / filteredHabits.length) * 100)
+  : 0;
 
   return (
     <div style={{
