@@ -543,7 +543,10 @@ const maxDaily = Math.max(
   gap: 6
 }}>
   {dailyData.map((d, i) => {
-    const height = d.count === 0 ? 6 : (d.count / maxDaily) * 60;
+    const height =
+  d.count === 0
+    ? 6
+    : (d.count / filteredHabits.length) * 60;
 
     return (
       <div key={i} style={{ textAlign: "center", flex: 1 }}>
