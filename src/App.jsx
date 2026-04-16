@@ -64,16 +64,28 @@ const [quote] = useState(() => {
   }, [habits]);
 
   const toggleDay = (habitId, dayKey) => {
-    setHabits(prev => prev.map(h => {
+  setHabits(prev =>
+    prev.map(h => {
       if (h.id !== habitId) return h;
-      const already = h.completedDays.includes(dayKey);
-      const newDays = already
-        ? h.completedDays.filter(d => d !== dayKey)
-        : [...h.completedDays, dayKey];
-      const streak = calcStreak(newDays);
-      return { ...h, completedDays: newDays, streak };
-    }));
-  };
+
+      let newDays;
+
+      if (h.completedDays.includes(dayKey)) {
+        // remove
+        newDays = h.completedDays.filter(d => d !== dayKey);
+      } else {
+        // add BUT prevent duplicates
+        newDays = [...new Set([...h.completedDays, dayKey])];
+      }
+
+      return {
+        ...h,
+        completedDays: newDays,
+        streak: calcStreak(newDays)
+      };
+    })
+  );
+};
 
   const calcStreak = (days) => {
     let streak = 0;
@@ -142,7 +154,10 @@ const dailyData = weekKeys.map(day => {
   return { day, count };
 });
 
-const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
+const maxDaily = Math.max(
+  1,
+  ...dailyData.map(d => Math.min(d.count, filteredHabits.length))
+);
   return (
     <div style={{
       minHeight: "100vh",
