@@ -443,7 +443,7 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
               display: "flex",
               gap: 6,
               marginLeft: 8,
-              overflowX: "auto"
+              overflowX: "auto",
               justifyContent: "flex-end"
             }}>
               {weekKeys.map((key, i) => {
