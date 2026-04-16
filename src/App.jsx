@@ -161,7 +161,7 @@ const maxDaily = Math.max(
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#0d0d0d",
+      background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
       fontFamily: "'DM Sans', sans-serif",
       color: "#f0ece4",
       padding: "0",
@@ -188,8 +188,14 @@ const maxDaily = Math.max(
           padding: 16px 20px;
           border-radius: 16px;
           background: rgba(255,255,255,0.04);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           border: 1px solid rgba(255,255,255,0.07);
           margin-bottom: 10px;
+          transition: all 0.25s ease;
+          .habit-row:active {
+            transform: scale(0.98);
+          }
         }
         .habit-row:hover { background: rgba(255,255,255,0.07); }
 
@@ -205,7 +211,11 @@ const maxDaily = Math.max(
           flex-shrink: 0;
         }
         .day-dot:hover { border-color: rgba(255,255,255,0.4); transform: scale(1.1); }
-        .day-dot.done { border-color: transparent; color: #0d0d0d; }
+        .day-dot.done {
+          border-color: transparent;
+          color: #0d0d0d;
+          box-shadow: 0 0 10px rgba(244, 143, 177, 0.6);
+        }
         .day-dot.today-dot { border-width: 2px; }
 
         .add-btn {
@@ -285,10 +295,23 @@ const maxDaily = Math.max(
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>
             {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
           </p>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 36, fontWeight: 700, lineHeight: 1.1, marginBottom: 8 }}>
+          <h1 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 36,
+            fontWeight: 700,
+            background: "linear-gradient(90deg, #f48fb1,             #ce93d8)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent"
+          }}>
             My Habits
-          </h1>
-          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", fontStyle: "italic" }}>{quote}</p>
+         </h1>
+           <p style={{
+             fontSize: 12,
+             color: "rgba(255,255,255,0.25)",
+             marginTop: 4
+           }}>
+             stay consistent, stay soft ✨
+           </p>
         </div>
 
         {/* Progress Card */}
@@ -389,6 +412,10 @@ const maxDaily = Math.max(
       onClick={() => setActiveCategory(cat)}
       style={{
         padding: "6px 12px",
+        transition: "all 0.2s ease",
+        boxShadow: activeCategory === cat 
+          ? "0 0 10px rgba(244,143,177,0.5)" 
+          : "none",
         borderRadius: 999,
         border: "1px solid rgba(255,255,255,0.15)",
         background: activeCategory === cat ? "#f48fb1" : "transparent",
