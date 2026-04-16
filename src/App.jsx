@@ -403,20 +403,24 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
 
 <div style={{
   display: "flex",
-  justifyContent: "space-between",
   alignItems: "center",
-  gap: 8,
-  flexWrap: "nowrap"
+  gap: 8
 }}>
     
     {/* LEFT SIDE */}
 <div style={{
   display: "flex",
   flexDirection: "column",
-  overflow: "hidden"
-}}>
-      
-      <span style={{ fontSize: 14, fontWeight: 500 }}>
+  minWidth: 0,
+  flex: 1
+}}>      
+      <span style={{
+        fontSize: 14,
+        fontWeight: 500,
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis"
+      }}>
         {habit.name}
       </span>
 
@@ -435,13 +439,14 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
   <span
     className="streak-badge"
     style={{
+      marginLeft: "auto",
       background: `${habit.color}22`,
       color: habit.color,
       fontSize: 11,
       padding: "4px 8px",
       borderRadius: 999,
-      whiteSpace: "nowrap",  
-      flexShrink: 0           
+      whiteSpace: "nowrap",
+      flexShrink: 0
     }}
   >
     🔥 {habit.streak}
