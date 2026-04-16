@@ -443,8 +443,10 @@ const maxDaily = Math.max(...dailyData.map(d => d.count), 1);
               display: "flex",
               gap: 6,
               marginLeft: 8,
-              overflowX: "auto",
-              justifyContent: "flex-end"
+              justifyContent: "flex-end",
+              flexWrap: "nowrap",
+              overflow: "hidden",
+              maxWidth: "100%"
             }}>
               {weekKeys.map((key, i) => {
                 const done = habit.completedDays.includes(key);
