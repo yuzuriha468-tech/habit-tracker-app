@@ -193,10 +193,12 @@ const maxDaily = Math.max(
           border: 1px solid rgba(255,255,255,0.07);
           margin-bottom: 10px;
           transition: all 0.25s ease;
-          .habit-row:active {
-            transform: scale(0.98);
-          }
         }
+
+        .habit-row:active {
+          transform: scale(0.98);
+        }
+
         .habit-row:hover { background: rgba(255,255,255,0.07); }
 
         .day-dot {
@@ -324,7 +326,7 @@ const maxDaily = Math.max(
             fontSize: 36,
             fontWeight: 700,
             lineHeight: 1.3,
-            paddingBottom: 4
+            paddingBottom: 8
           }}>
             My Habits
          </h1>
@@ -404,35 +406,6 @@ const maxDaily = Math.max(
   </div>
 
 </div>
-
-        {/* Week labels */}
-        {/* WEEK LABELS (PER ROW) */}
-        <div style={{
-          display: "flex",
-          gap: 6,
-          marginBottom: 6,
-          marginLeft: 2
-        }}>
-          {weekKeys.map((key) => {
-           const isToday = key === todayKey;
-           const day = new Date(key).getDay();
-
-           return (
-             <div
-               key={key}
-               style={{
-                 width: 32,
-                 textAlign: "center",
-                 fontSize: 10,
-                 fontWeight: isToday ? 700 : 400,
-                 color: isToday ? "#f48fb1" : "rgba(255,255,255,0.3)"
-               }}
-             >
-               {DAYS[day]}
-             </div>
-           );
-         })}
-       </div>
 
 <div style={{
   display: "flex",
@@ -515,13 +488,38 @@ const maxDaily = Math.max(
 
 </div>
 
+<div style={{
+  display: "flex",
+  gap: 6,
+  marginBottom: 4
+}}>
+  {weekKeys.map((key) => {
+    const isToday = key === todayKey;
+    const day = new Date(key).getDay();
+
+    return (
+      <div
+        key={key}
+        style={{
+          width: 32,
+          textAlign: "center",
+          fontSize: 10,
+          color: isToday ? "#f48fb1" : "rgba(255,255,255,0.3)"
+        }}
+      >
+        {DAYS[day]}
+      </div>
+    );
+  })}
+</div>
+
 {/* BOTTOM: circles */}
 <div style={{
   display: "flex",
   gap: 6,
   overflowX: "auto",
   padding: "6px 0",
-  background: "rgba(255,255,255,0.02)",   // soft blend
+  background: "transparent",   // soft blend
   borderRadius: 12
 }}>
   {weekKeys.map((key) => {
