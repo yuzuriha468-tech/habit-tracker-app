@@ -211,11 +211,11 @@ const maxDaily = Math.max(
           flex-shrink: 0;
         }
         .day-dot:hover { border-color: rgba(255,255,255,0.4); transform: scale(1.1); }
-        .day-dot.done {
-          border-color: transparent;
+        .day-dot.done { 
+          border-color: transparent; 
           color: #0d0d0d;
-          box-shadow: 0 0 10px rgba(244, 143, 177, 0.6);
-        }
+          box-shadow: 0 0 10px currentColor, 0 0 20px         currentColor;
+         }
         .day-dot.today-dot { border-width: 2px; }
 
         .add-btn {
