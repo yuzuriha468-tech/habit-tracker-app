@@ -200,23 +200,47 @@ const maxDaily = Math.max(
         .habit-row:hover { background: rgba(255,255,255,0.07); }
 
         .day-dot {
-          width: 32px; height: 32px;
+          width: 32px;
+          height: 32px;
+          min-width: 32px;
+          min-height: 32px;
+          aspect-ratio: 1 / 1;
+
           border-radius: 50%;
           border: 1.5px solid rgba(255,255,255,0.15);
           background: transparent;
+
           cursor: pointer;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          font-size: 10px;
+          font-weight: 600;
+          color: rgba(255,255,255,0.3);
+
           transition: all 0.18s ease;
           flex-shrink: 0;
         }
-        .day-dot:hover { border-color: rgba(255,255,255,0.4); transform: scale(1.1); }
+
+        .day-dot:hover {
+          border-color: rgba(255,255,255,0.4);
+          transform: scale(1.1);
+        }
+
+        .day-dot:active {
+          transform: scale(0.9);
+        }
+
         .day-dot.done { 
           border-color: transparent; 
           color: #0d0d0d;
-          box-shadow: 0 0 10px currentColor, 0 0 20px         currentColor;
-         }
-        .day-dot.today-dot { border-width: 2px; }
+          box-shadow: 0 0 8px currentColor;
+        }
+
+        .day-dot.today-dot {
+          border-width: 2px;
+        }
 
         .add-btn {
           width: 100%; padding: 14px;
@@ -299,9 +323,8 @@ const maxDaily = Math.max(
             fontFamily: "'Playfair Display', serif",
             fontSize: 36,
             fontWeight: 700,
-            background: "linear-gradient(90deg, #f48fb1,             #ce93d8)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent"
+            lineHeight: 1.3,
+            paddingBottom: 4
           }}>
             My Habits
          </h1>
@@ -383,22 +406,33 @@ const maxDaily = Math.max(
 </div>
 
         {/* Week labels */}
-        <div style={{ display: "flex", justifyContent: "flex-end", gap: 4, paddingRight: 20, marginBottom: 6 }}>
-          {weekKeys.map((key, i) => {
-            const dayOfWeek = new Date(key + "T12:00:00").getDay();
-            const isToday = key === todayKey;
-            return (
-              <div key={key} style={{
-                width: 32, textAlign: "center",
-                fontSize: 10, fontWeight: isToday ? 700 : 400,
-                color: isToday ? "#f48fb1" : "rgba(255,255,255,0.3)",
-                letterSpacing: "0.02em",
-              }}>
-                {DAYS[dayOfWeek]}
-              </div>
-            );
-          })}
-        </div>
+        {/* WEEK LABELS (PER ROW) */}
+        <div style={{
+          display: "flex",
+          gap: 6,
+          marginBottom: 6,
+          marginLeft: 2
+        }}>
+          {weekKeys.map((key) => {
+           const isToday = key === todayKey;
+           const day = new Date(key).getDay();
+
+           return (
+             <div
+               key={key}
+               style={{
+                 width: 32,
+                 textAlign: "center",
+                 fontSize: 10,
+                 fontWeight: isToday ? 700 : 400,
+                 color: isToday ? "#f48fb1" : "rgba(255,255,255,0.3)"
+               }}
+             >
+               {DAYS[day]}
+             </div>
+           );
+         })}
+       </div>
 
 <div style={{
   display: "flex",
@@ -485,7 +519,10 @@ const maxDaily = Math.max(
 <div style={{
   display: "flex",
   gap: 6,
-  overflowX: "auto"
+  overflowX: "auto",
+  padding: "6px 0",
+  background: "rgba(255,255,255,0.02)",   // soft blend
+  borderRadius: 12
 }}>
   {weekKeys.map((key) => {
     const done = habit.completedDays.includes(key);
