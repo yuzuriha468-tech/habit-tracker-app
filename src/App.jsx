@@ -510,12 +510,21 @@ const maxDaily = Math.max(
       {habit.name}
     </div>
 
-    <div style={{
-      fontSize: 11,
-      color: "rgba(255,255,255,0.35)"
-    }}>
-      {habit.category}
-    </div>
+    {habit.history && habit.history.length > 0 && (
+  <div style={{
+    fontSize: 11,
+    color: "rgba(255,255,255,0.25)",
+    marginTop: 2
+  }}>
+    Last: {
+      (() => {
+        const last = habit.history[habit.history.length - 1];
+        const day = new Date(last.date).toLocaleDateString("en-US", { weekday: "short" });
+        return `${last.action === "completed" ? "Completed" : "Removed"} on ${day}`;
+      })()
+    }
+  </div>
+)}
   </div>
 
   {/* RIGHT (STREAK INLINE FIXED) */}
