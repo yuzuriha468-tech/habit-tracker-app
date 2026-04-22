@@ -113,13 +113,20 @@ const [quote] = useState(() => {
       return {
         ...h,
         completedDays: newDays,
-        history: [
-          ...(h.history || []),
-          {
-            date: dayKey,
-            action: already ? "removed" : "completed"
-          }
-        ],
+        history: Array.isArray(h.history)
+          ? [
+              ...h.history,
+              {
+                date: dayKey,
+                action: already ? "removed" : "completed"
+              }
+            ]
+          : [
+              {
+                date: dayKey,
+                action: already ? "removed" : "completed"
+              }
+            ],
         streak: calcStreak(newDays)
       };
     })
