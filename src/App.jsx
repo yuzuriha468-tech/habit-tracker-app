@@ -114,7 +114,7 @@ const [quote] = useState(() => {
         ...h,
         completedDays: newDays,
         history: [
-          ...(h.history || []),   // safe for old data
+          ...(h.history || []),
           {
             date: dayKey,
             action: already ? "removed" : "completed"
