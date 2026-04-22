@@ -95,18 +95,18 @@ const [quote] = useState(() => {
     try { localStorage.setItem("habits_v2", JSON.stringify(habits)); } catch {}
   }, [habits]);
 
-  const toggleDay = (habitId, dayKey) => {
+const toggleDay = (habitId, dayKey) => {
   setHabits(prev =>
     prev.map(h => {
       if (h.id !== habitId) return h;
 
+      const already = h.completedDays.includes(dayKey);
+
       let newDays;
 
-      if (h.completedDays.includes(dayKey)) {
-        // remove
+      if (already) {
         newDays = h.completedDays.filter(d => d !== dayKey);
       } else {
-        // add BUT prevent duplicates
         newDays = [...new Set([...h.completedDays, dayKey])];
       }
 
