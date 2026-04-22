@@ -4,10 +4,10 @@ const DAYS = ["S", "M", "T", "W", "T", "F", "S"];
 const FULL_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const DEFAULT_HABITS = [
-  { id: 1, name: "Drink Water 💧", category: "Glow Up", color: "#4fc3f7", streak: 0, completedDays: [] },
-  { id: 2, name: "Study 📖", category: "Study", color: "#f48fb1", streak: 0, completedDays: [] },
-  { id: 3, name: "No Junk Food 🥗", category: "Glow Up", color: "#a5d6a7", streak: 0, completedDays: [] },
-  { id: 4, name: "Wake Up Early 🌅", category: "Mind", color: "#ffe082", streak: 0, completedDays: [] },
+  { id: 1, name: "Drink Water 💧", category: "Glow Up", color: "#4fc3f7", streak: 0, completedDays: [], history [] },
+  { id: 2, name: "Study 📖", category: "Study", color: "#f48fb1", streak: 0, completedDays: [], history [] },
+  { id: 3, name: "No Junk Food 🥗", category: "Glow Up", color: "#a5d6a7", streak: 0, completedDays: [], history [] },
+  { id: 4, name: "Wake Up Early 🌅", category: "Mind", color: "#ffe082", streak: 0, completedDays: [], history [] },
 ];
 
 const todayIndex = new Date().getDay();
